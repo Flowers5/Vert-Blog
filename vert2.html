@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Header and Footer Website</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+        body {
+            background: rgb(255, 255, 255);
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: black;
+            color: white;
+            padding: 64px;
+            text-align: right;
+            font-size: 24px;
+            font-weight: 600;
+            z-index: 999;
+        }
+
+        footer {
+            background-color: black;
+            color: rgb(0, 0, 0);
+            padding: 50px;
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            font-size: 16px;
+            z-index: 2;
+        }
+
+        h1 {
+            font-weight: 200;
+        }
+
+        .vertical-text-container {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            font-weight: 200;
+            background-color: rgb(0, 0, 0);
+            color: white;
+            padding: 20px;
+            z-index: 3;
+        }
+
+        .vertical-text span {
+            position: relative;
+            display: block;
+            margin: 0;
+            cursor: pointer;
+            z-index: 2;
+            height: 100px;
+        }
+
+        .hidden-link {
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            transform: translateY(-50%) translateX(-150%);
+            background-color: black;
+            color: white;
+            padding: 14px;
+            white-space: nowrap;
+            z-index: -1;
+            transition: transform 1s ease;
+        }
+
+        .block {
+            align-items: center;
+            position: absolute;
+            left: 57px;
+            height: 100px;
+            background-color: rgb(0, 0, 0);
+            transition: left 1s ease .3s, width 1s ease .3s;
+            width: calc(100vw - 57px);
+            pointer-events: none;
+            padding: 20px;
+            box-sizing: border-box;
+            color: white;
+            text-align: left;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            z-index: -2;
+        }
+
+        .block-content {
+            opacity: 0;
+            transition: opacity 1s ease 1s;
+            letter-spacing: 17px;
+        }
+
+        .vertical-text span {
+            display: flex;
+            align-items: center;
+        }
+
+        /* New About Section */
+        .about-container {
+            position: fixed;
+            top: 0;
+            right: -100px; /* Initially hidden */
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 48px;
+            font-weight: 600;
+            background-color: black;
+            color: white;
+            padding: 20px;
+            z-index: 3;
+            transition: right 1s ease; /* Slide effect */
+        }
+
+        .about-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg); /* Flip the vertical text upright */
+        }
+
+        /* Anchor styles */
+        .about-container a {
+            text-decoration: none;
+            color: white; /* Make the link look like the rest of the text */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    Mr. Blog
+</header>
+
+<div class="vertical-text-container">
+    <div class="vertical-text">
+        <span>
+            ★
+            <div class="hidden-link">&ensp;&ensp;&ensp;&ensp;Holmes Improvement&ensp;&ensp;&ensp;&ensp;</div>
+            <div class="block" id="block1"><div class="block-content">★</div></div>
+        </span>
+
+        <span>
+            ★
+            <div class="hidden-link">&ensp;&ensp;&ensp;&ensp;Hello Worldle&ensp;&ensp;&ensp;&ensp;</div>
+            <div class="block" id="block2"><div class="block-content">★</div></div>
+        </span>
+
+        <span>
+            ★
+            <div class="hidden-link">&ensp;&ensp;&ensp;&ensp;Beautiful Weather&ensp;&ensp;&ensp;&ensp;</div>
+            <div class="block" id="block3"><div class="block-content">★</div></div>
+        </span>
+
+        <span>
+            ★
+            <div class="hidden-link">&ensp;&ensp;&ensp;&ensp;i love flags&ensp;&ensp;&ensp;&ensp;</div>
+            <div class="block" id="block4"><div class="block-content">★</div></div>
+        </span>
+
+        <span>
+            ★
+            <div class="hidden-link">&ensp;&ensp;&ensp;&ensp;Mr. Me&ensp;&ensp;&ensp;&ensp;</div>
+            <div class="block" id="block5"><div class="block-content">★</div></div>
+        </span>
+    </div>
+</div>
+
+<!-- New About Section -->
+<div class="about-container" id="aboutContainer">
+    <a href="about.html" class="about-text">ABOUT</a>
+</div>
+
+<footer>
+    © 2024 Mr. Blog - All Rights Reserved
+</footer>
+
+<script>
+    const hiddenLinks = document.querySelectorAll('.hidden-link');
+    const blocks = [
+        document.getElementById('block1'),
+        document.getElementById('block2'),
+        document.getElementById('block3'),
+        document.getElementById('block4'),
+        document.getElementById('block5')
+    ];
+
+    const linkStates = Array(hiddenLinks.length).fill(false);
+    const blockPlayed = Array(blocks.length).fill(false);
+    let allBlocksActivated = false;
+
+    hiddenLinks.forEach((link, index) => {
+        const span = link.parentElement;
+
+        span.addEventListener('click', (event) => {
+            const block = blocks[index];
+            const blockContent = block.querySelector('.block-content');
+            const isVisible = linkStates[index];
+            const linkWidth = link.offsetWidth;
+            const letterWidth = span.textContent.trim().length === 1 
+                                ? span.offsetWidth 
+                                : 35;
+
+            if (!isVisible) {
+                link.style.transform = 'translateY(-50%) translateX(0)';
+            } else {
+                link.style.transform = 'translateY(-50%) translateX(-150%)';
+            }
+
+            linkStates[index] = !isVisible;
+
+            if (!blockPlayed[index]) {
+                block.style.left = `${letterWidth + linkWidth}px`;
+                const remainingWidth = window.innerWidth - (letterWidth + linkWidth);
+                block.style.width = `${remainingWidth}px`;
+                blockContent.style.opacity = '1';
+                blockPlayed[index] = true;
+
+                if (blockPlayed.every(played => played)) {
+                    allBlocksActivated = true;
+
+                    setTimeout(() => {
+                        blocks.forEach(block => {
+                            block.style.transition = 'left 1s ease';
+                            block.style.left = '100vw';
+                        });
+                    }, 2000);
+
+                    // Trigger About section slide out after 1 second delay
+                    setTimeout(() => {
+                        const aboutContainer = document.getElementById('aboutContainer');
+                        aboutContainer.style.right = '0'; // Slide it into view
+                    }, 3000); // 1 second after blocks leave the screen
+                }
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
